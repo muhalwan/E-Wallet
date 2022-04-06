@@ -32,7 +32,7 @@ CREATE TABLE `useracc` (
   `nama` varchar(32) NOT NULL,
   `email` varchar(64) NOT NULL,
   `kata_sandi` varchar(128) NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
