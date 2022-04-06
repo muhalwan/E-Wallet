@@ -2,15 +2,15 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') :
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') :
     http_response_code(405);
     echo json_encode([
         'success' => 0,
-        'message' => 'Metode Permintaan Tidak Valid. Metode HTTP harus GET',
+        'message' => 'Metode Permintaan Tidak Valid. Metode HTTP harus POST',
     ]);
     exit;
 endif;
@@ -49,62 +49,45 @@ if($jwt){
         // decode jwt
         $decoded = JWT::decode($jwt, $key, array('HS256'));
  
-        $record = null;
-        $rekam = array();
+        // set user property values here
+        // set user property values
+        $user->nama = $data->nama;
+        $user->email = $data->email;
+        $user->kata_sandi = $data->kata_sandi;
+        $user->role = $data->role;
+        $user->id_user = $decoded->data->id_user;
         
-        //if($decoded->data->role == "1"){
-            if($record = $user->getAllUser()){
-                 // set response code
-                 while($row = $record->fetchAll(PDO::FETCH_ASSOC)){
-                     $rekam['rekam'] = $row;
-                 }
-    
-                 if(!empty($rekam)){
-                    http_response_code(200);
-                    print json_encode($rekam);
-                 }
+        if($decoded->data->role == "1"){
+            // create the user
+            if(
+                !empty($user->nama) &&
+                !empty($user->email) &&
+                !empty($user->kata_sandi) &&
+                !empty($user->role) &&
+                $user->create()
+            ){
+                // set response code
+                http_response_code(200);
+            
+                // display message: user was created
+                echo json_encode(array("message" => "User telah dibuat."));
             }
-            // message if unable to delete user
+            // message if unable to create user
             else{
                 // set response code
-                http_response_code(401);
+                http_response_code(400);
             
-                // show error message
-                echo json_encode(array("message" => "Tidak dapat membaca user."));
+                // display message: unable to create user
+                echo json_encode(array("message" => "Tidak dapat membuat user."));
             }
-        
-        /*
-        else if($decoded->data->role == "2"){
-            // if you want to read id_user from jwt
-            $user->id_user = $decoded->data->id_user;
-
-            if($record = $user->getUser()){
-                // set response code
-                if($row = $record->fetch(PDO::FETCH_ASSOC)){
-                    $rekam['rekam'] = $row;
-                }
-   
-                if(!empty($rekam)){
-                   http_response_code(200);
-                   print json_encode($rekam);
-                }
-           }
-           // message if unable to read user
-           else{
-               // set response code
-               http_response_code(401);
-           
-               // show error message
-               echo json_encode(array("message" => "Tidak dapat membaca user."));
-           }
         }
         else{
             // set response code
             http_response_code(400);
             
             // display message: unable to create user
-            echo json_encode(array("message" => "Akses hanya untuk admin & user"));
-        }*/
+            echo json_encode(array("message" => "Akses hanya untuk admin."));
+        }
     }
     // catch failed decoding will be here
     // if decode fails, it means jwt is invalid
@@ -120,6 +103,8 @@ if($jwt){
         ));
     }
 }
+// error message if jwt is empty will be here
+// show error message if jwt is empty
 else{
     // set response code
     http_response_code(401);

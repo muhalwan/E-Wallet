@@ -108,7 +108,7 @@ if($jwt){
             
                 echo json_encode(
                     array(
-                        "message" => "User dengan nama = $user->nama telah terupdate.",
+                        "message" => "User dengan ID = $user->id_user telah terupdate.",
                         "jwt" => $jwt
                     )
                 );
