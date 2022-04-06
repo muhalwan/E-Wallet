@@ -4,7 +4,7 @@ class Database{
  
     // specify your own database credentials
     private $servername = "localhost";
-    private $db_name = "pweb";
+    private $db_name = "pi";
     private $username = "root";
     private $password = "";
     public $conn;
