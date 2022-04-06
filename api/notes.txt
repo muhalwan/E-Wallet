@@ -1,0 +1,26 @@
+# To create. Only admin can access
+POST /api/create.php
+
+# To get all users. Only admin can access
+GET /api/read.php
+
+# To get particular user. Every user can access his data only. Admin can access all
+GET /api/read.php/<id>
+
+# To update particular user. Every user can update his data only. Admin can update all
+PUT /api/update.php/<id>
+
+# To delete particular user. Only admin can access
+DELETE /api/delete.php/<id> 
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDAyMzE0NTEsImV4cCI6MTY0MDIzNTA1MSwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0XC8iLCJkYXRhIjp7ImlkX3VzZXIiOiIzIiwibmFtYSI6ImFkbWluMSIsImVtYWlsIjoiYWRtaW4xIiwicm9sZSI6IjEifX0.FUCF1VRImfAcldX1aE7_T8hjaMujlO78j1ELTgyMMhw
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDAyMzE0NzcsImV4cCI6MTY0MDIzNTA3NywiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0XC8iLCJkYXRhIjp7ImlkX3VzZXIiOiI0IiwibmFtYSI6InVzZXIxIiwiZW1haWwiOiJ1c2VyMSIsInJvbGUiOiIyIn19.WrDLYVYDbXFqIk24hFB5KjIh1Ha3JneLKNvzZU4PHUY
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDAyMzE2MzYsImV4cCI6MTY0MDIzNTIzNiwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0XC8iLCJkYXRhIjp7ImlkX3VzZXIiOiIxIiwibmFtYSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbiIsInJvbGUiOiIxIn19.16SG3_1--dsiC6c73uSIfPnI2rQWCHJiioG1D43zuOI
+
+
+
+
+
+
